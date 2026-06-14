@@ -2,8 +2,9 @@ name: ML Workflow CI
 
 on:
   push:
-    paths:
-      - 'MLProject/**'
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
