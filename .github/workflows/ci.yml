@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12.7'
 
@@ -25,25 +25,27 @@ jobs:
 
       - name: Run MLflow Project
         run: |
-          cd MLProject
+          cd MLProject_folder
           # Menggunakan env-manager=local agar CI berjalan lebih cepat
           mlflow run . --env-manager=local
 
       - name: Simpan Artefak ke GitHub
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: mlflow-artifacts
-          path: MLProject/mlruns/
+          path: MLProject_folder/mlruns/
 
       - name: Login to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker Image via MLflow
+        env:
+          MLFLOW_TRACKING_URI: "file://${{ github.workspace }}/MLProject_folder/mlruns"
         run: |
-          cd MLProject
+          cd MLProject_folder
           RUN_ID=$(cat run_id.txt)
           mlflow models build-docker -m "runs:/$RUN_ID/model" -n ${{ secrets.DOCKER_USERNAME }}/credit-risk-model:latest
 
