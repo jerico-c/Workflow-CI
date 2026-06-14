@@ -11,7 +11,7 @@ mlflow.set_tracking_uri("file://" + os.path.abspath("./mlruns"))
 # Run ID yang sudah dibuatkan oleh MLflow Project di latar belakang.
 with mlflow.start_run() as run:
     # 1. Load Data
-    X_train = pd.read_csv('dataset_preprocessing/x_train_clean.csv')
+    X_train = pd.read_csv('dataset_preprocessing/X_train_clean.csv')
     y_train = pd.read_csv('dataset_preprocessing/y_train_clean.csv').squeeze()
 
     # 2. Latih Model (Versi cepat untuk CI)
