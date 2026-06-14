@@ -13,7 +13,7 @@ with mlflow.start_run() as run:
     X_train = pd.read_csv('dataset_preprocessing/X_train_clean.csv')
     y_train = pd.read_csv('dataset_preprocessing/y_train_clean.csv').squeeze()
 
-    # 2. Latih Model (Versi cepat untuk CI)
+    # 2. Latih Model
     model = RandomForestClassifier(n_estimators=50, random_state=42)
     model.fit(X_train, y_train)
 
