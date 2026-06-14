@@ -10,7 +10,7 @@ mlflow.set_experiment("CI_Credit_Risk")
 
 with mlflow.start_run() as run:
     # 1. Load Data
-    X_train = pd.read_csv('dataset_preprocessing/X_train_clean.csv')
+    X_train = pd.read_csv('dataset_preprocessing/x_train_clean.csv')
     y_train = pd.read_csv('dataset_preprocessing/y_train_clean.csv').squeeze()
 
     # 2. Latih Model
